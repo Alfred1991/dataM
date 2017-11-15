@@ -55,6 +55,11 @@ public interface IConstantFactory {
     String getMenuNameByCode(String code);
 
     /**
+     * 获取dataM账号名称通过id
+     */
+    String getRolesinambarimanagerDataM_accountByDataM_account_id(Integer id);
+
+    /**
      * 获取字典名称
      */
     String getDictName(Integer dictId);

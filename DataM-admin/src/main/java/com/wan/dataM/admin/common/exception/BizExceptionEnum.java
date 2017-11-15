@@ -44,6 +44,8 @@ public enum BizExceptionEnum {
 	 */
 	MENU_PCODE_COINCIDENCE(400,"菜单编号和副编号不能一致"),
 	EXISTED_THE_MENU(400,"菜单编号重复，不能添加"),
+	EXISTED_THE_ROLESINAMBARIMANAGER(400,"dataM账号重复，不能添加"),
+
 	DICT_MUST_BE_NUMBER(400,"字典的值必须为数字"),
 	REQUEST_NULL(400, "请求有错误"),
 	SESSION_TIMEOUT(400, "会话超时"),

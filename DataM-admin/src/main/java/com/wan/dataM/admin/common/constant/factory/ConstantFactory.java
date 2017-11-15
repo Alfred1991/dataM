@@ -28,6 +28,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
+    private RolesinambarimanagerMapper rolesinambarimanagerMapper = SpringContextHolder.getBean(RolesinambarimanagerMapper.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -145,6 +146,23 @@ public class ConstantFactory implements IConstantFactory {
             }
         }
     }
+
+    /**
+     * 获取dataM账号名称通过id
+     */
+    @Override
+    public String getRolesinambarimanagerDataM_accountByDataM_account_id(Integer id){
+        if (ToolUtil.isEmpty(id)) {
+            return "";
+        } else {
+            Rolesinambarimanager rolesinambarimanager = rolesinambarimanagerMapper.selectById(id);
+            if (rolesinambarimanager == null) {
+                return "";
+            } else {
+                return rolesinambarimanager.getDataM_account();
+            }
+        }
+    };
 
     /**
      * 获取菜单名称通过编号
