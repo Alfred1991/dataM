@@ -13,6 +13,8 @@ import java.util.Map;
  */
 public interface AmbariDao {
 
-    List<Map<String, Object>> getAmbariAlertDefinitions(@Param("page") Page<OperationLog> page,  @Param("orderByField") String orderByField, @Param("isAsc") boolean isAsc);
+    List<Map<String, Object>> getAmbariAlertDefinitions(@Param("page") Page<OperationLog> page,  @Param("orderByField") String orderByField, @Param("isAsc") boolean isAsc,@Param("definitionName") String definitionName);
+
+    Map<String,Object> getAmbariAlertDefinitionById(@Param("ambariId") Integer ambariId);
 
 }

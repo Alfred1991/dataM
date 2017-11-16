@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wan.dataM.admin.modular.platformMonitor.dao.PlatformMonitorDao">
+
+
+    <select id="getPlatformMonitorDefinitions" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select * from dataM.dm_monitor_info where 1 = 1
+
+        <choose>
+            <when test="orderByField != null and orderByField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        order by ${orderByField} ASC
+                    </when>
+                    <otherwise>
+                        order by ${orderByField} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by monitor_id ASC
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

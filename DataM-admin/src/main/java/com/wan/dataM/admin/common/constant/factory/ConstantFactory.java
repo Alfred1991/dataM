@@ -29,6 +29,8 @@ public class ConstantFactory implements IConstantFactory {
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
     private RolesinambarimanagerMapper rolesinambarimanagerMapper = SpringContextHolder.getBean(RolesinambarimanagerMapper.class);
+    private AlertDefinitionMapper alertDefinitionMapper = SpringContextHolder.getBean(AlertDefinitionMapper.class);
+    private MonitorDefinitionMapper monitorDefinitionMapper = SpringContextHolder.getBean(MonitorDefinitionMapper.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");

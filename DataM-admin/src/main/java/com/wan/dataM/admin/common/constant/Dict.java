@@ -38,4 +38,9 @@ public interface Dict {
      */
     String NoticeMap = "NoticeMap";
 
+    /**
+     * 通知平台监控管理的字典
+     */
+    String MonitorDefinitionMap = "MonitorDefinitionMap";
+
 }
