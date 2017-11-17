@@ -29,7 +29,7 @@ import java.util.Map;
 @RequestMapping("/platformMonitor")
 public class PlatformMonitorController extends BaseController {
 
-    private String PREFIX = "/platformMonitor/platformMonitor/";
+    private String PREFIX = "/system/platformMonitor/";
 
     @Resource
     private PlatformMonitorDao platformMonitorDao;
@@ -87,7 +87,9 @@ public class PlatformMonitorController extends BaseController {
         if(null != result && result.size() > 0){
             return super.DUPLICATED;
         }
-        monitorDefinitionMapper.insert(monitorDefinition);
+        platformMonitorDao.insertPlatformMonitorDefinition(monitorDefinition.getDefinition_id(),monitorDefinition.getDefinition_name(),
+                monitorDefinition.getService_name(),monitorDefinition.getComponent_name(),
+                monitorDefinition.getSchedule_interval(),monitorDefinition.getAlert_label());
         return super.SUCCESS_TIP;
     }
 

@@ -3,7 +3,7 @@
     <div class="ibox-content">
         <div class="form-horizontal">
 
-            <input type="hidden" id="id" value="${alertDefinition.definition_id}">
+            <input type="hidden" id="definition_id" value="${alertDefinition.definition_id}">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
@@ -17,9 +17,9 @@
                 </div>
                 <div class="col-sm-6">
                     <div id="driverInfoContent">
-                        <#input id="scope" name="监控范围" underline="true" value="${alertDefinition.scope}" disabled="disabled"/>
+                        <#input id="alert_label" name="监控范围" underline="true" value="${alertDefinition.scope}" disabled="disabled"/>
 
-                        <#input id="description" name="描述" underline="true" title="${alertDefinition.description}" value="${alertDefinition.description}" readonly="readonly"/>
+                        <#input id="desc" name="描述" underline="true" title="${alertDefinition.description}" value="${alertDefinition.description}" readonly="readonly"/>
                     </div>
                 </div>
             </div>
