@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 /**
  * Created by chenran on 2017/11/15 0015.
  */
+
+
 public class MonitorDefinition extends Model<MonitorDefinition>{
 
     /**

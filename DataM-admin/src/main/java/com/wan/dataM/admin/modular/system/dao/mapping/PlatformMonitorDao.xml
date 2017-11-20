@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wan.dataM.admin.modular.platformMonitor.dao.PlatformMonitorDao">
+<mapper namespace="com.wan.dataM.admin.modular.system.dao.PlatformMonitorDao">
 
 
     <select id="getPlatformMonitorDefinitions" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
@@ -22,5 +22,20 @@
             </otherwise>
         </choose>
     </select>
+
+    <select id="getPlatformMonitorDefinitionByDefinitionId" resultType="map">
+        select * from dataM.dm_monitor_info where 1 = 1
+        <if test="definitionId != null and definitionId != ''">
+            and definition_id = #{definitionId}
+        </if>
+    </select>
+
+
+    <insert id="insertPlatformMonitorDefinition" parameterType="java.util.Map">
+        insert into dataM.dm_monitor_info(definition_id,definition_name,service_name,component_name,schedule_interval,alert_label,alert_content,auto_recover_api)
+        values (#{definitionId},#{definitionName},#{serviceName},#{componentName},#{scheduleInterval},#{alertLabel},"","");
+    </insert>
+
+
 
 </mapper>

@@ -15,9 +15,13 @@ public interface PlatformMonitorDao {
 
     List<Map<String, Object>> getPlatformMonitorDefinitions(@Param("page") Page<OperationLog> page,  @Param("orderByField") String orderByField, @Param("isAsc") boolean isAsc);
 
-    Map<String,Object> getPlatformMonitorDefinitionById(@Param("monitorId") Integer ambariId);
+    Map<String,Object> getPlatformMonitorDefinitionById(Integer ambariId);
 
-    Map<String,Object> getPlatformMonitorDefinitionByDefinitionId(@Param("monitorId") Integer definitionId);
+    Map<String,Object> getPlatformMonitorDefinitionByDefinitionId(@Param("definitionId") Integer definitionId);
+
+    boolean insertPlatformMonitorDefinition(@Param("definitionId") Integer definitionId,@Param("definitionName") String definitionName,
+                                            @Param("serviceName") String serviceName,@Param("componentName") String componentName,
+                                            @Param("scheduleInterval") Integer scheduleInterval,@Param("alertLabel") String alertLabel);
 
 
 }

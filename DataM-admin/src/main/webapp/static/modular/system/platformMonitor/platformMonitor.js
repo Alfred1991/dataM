@@ -14,8 +14,12 @@ var PlatformMonitor = {
 PlatformMonitor.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-        {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'}
-    ];
+        {title: '监控id', field: 'monitor_id', visible: false, align: 'center', valign: 'middle'},
+        {title: '告警id', field: 'definition_id',align: 'center', valign: 'middle'},
+        {title: '告警定义名称', field: 'definition_name', align: 'center', valign: 'middle', sortable: true},
+        {title: '服务名称', field: 'service_name', align: 'center', valign: 'middle'},
+        {title: '组件名称', field: 'component_name', align: 'center', valign: 'middle', sortable: true},
+        {title: '告警周期(分)', field: 'schedule_interval', align: 'center', valign: 'middle', sortable: true}];
 };
 
 /**
@@ -89,9 +93,54 @@ PlatformMonitor.search = function () {
     PlatformMonitor.table.refresh({query: queryData});
 };
 
+
 $(function () {
+    init();
     var defaultColunms = PlatformMonitor.initColumn();
     var table = new BSTable(PlatformMonitor.id, "/platformMonitor/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     PlatformMonitor.table = table.init();
 });
+
+
+
+function init() {
+
+    var BootstrapTable = $.fn.bootstrapTable.Constructor;
+    BootstrapTable.prototype.onSort = function (event) {
+        var $this = event.type === "keypress" ? $(event.currentTarget) : $(event.currentTarget).parent(),
+            $this_ = this.$header.find('th').eq($this.index()),
+            sortName = this.header.sortNames[$this.index()];
+
+        this.$header.add(this.$header_).find('span.order').remove();
+
+        if (this.options.sortName === $this.data('field')) {
+            this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.options.sortName = sortName || $this.data('field');
+            this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+        }
+        this.trigger('sort', this.options.sortName, this.options.sortOrder);
+
+        $this.add($this_).data('order', this.options.sortOrder);
+
+        // Assign the correct sortable arrow
+        this.getCaret();
+
+        if (this.options.sidePagination === 'server') {
+            this.initServer(this.options.silentSort);
+            return;
+        }
+
+        this.initSort();
+        this.initBody();
+    };
+    BootstrapTable.prototype.getCaret = function () {
+        var that = this;
+
+        $.each(this.$header.find('th'), function (i, th) {
+            var sortName = that.header.sortNames[i];
+            $(th).find('.sortable').removeClass('desc asc').addClass((sortName || $(th).data('field')) === that.options.sortName ? that.options.sortOrder : 'both');
+        });
+    };
+}
