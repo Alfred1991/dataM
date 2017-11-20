@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${alertDefinition.definition_id}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="definition_name" name="监控项" underline="true" value="${alertDefinition.definition_name}" disabled="disabled"/>
+
+                    <#input id="service_name" name="Stack名" underline="true" value="${alertDefinition.service_name}" disabled="disabled"/>
+
+                    <#input id="component_name" name="组件名" type="email" value="${alertDefinition.component_name}" disabled="disabled"/>
+
+                    <#input id="schedule_interval" name="监控周期" type="email" value="${alertDefinition.schedule_interval}" disabled="disabled"/>
+                </div>
+                <div class="col-sm-6">
+                    <div id="driverInfoContent">
+                        <#input id="scope" name="监控范围" underline="true" value="${alertDefinition.scope}" disabled="disabled"/>
+
+                        <#input id="description" name="描述" underline="true" title="${alertDefinition.description}" value="${alertDefinition.description}" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="确认添加" id="ensure" icon="fa-check" clickFun="AmbariInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消添加" id="cancel" icon="fa-eraser" clickFun="AmbariInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/ambari/ambari_info.js"></script>
+@}
