@@ -1,11 +1,18 @@
 package com.wan.dataM.admin.modular.system.controller;
 
+import com.wan.dataM.admin.common.persistence.dao.DmambariuserMapper;
+import com.wan.dataM.admin.common.persistence.model.Dmambariuser;
+import com.wan.dataM.admin.core.shiro.ShiroKit;
+import com.wan.dataM.admin.core.shiro.ShiroUser;
 import com.wan.dataM.core.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.net.URLEncoder;
 
 /**
  * 进入ambari webui控制器
@@ -18,11 +25,20 @@ public class EnterambariwebuiController extends BaseController {
 
     private String PREFIX = "/system/enterambariwebui/";
 
+    @Resource
+    DmambariuserMapper dmambariuserMapper;
+
+
     /**
      * 跳转到进入ambari webui首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(Model model) {
+        ShiroUser shiroUser = ShiroKit.getUser();
+        Integer id = shiroUser.getId();
+        Dmambariuser dmambariuser = dmambariuserMapper.selectById(id);
+        String token= URLEncoder.encode(dmambariuser.getUserpassword());
+        model.addAttribute("token", token);
         return PREFIX + "enterambariwebui.html";
     }
 

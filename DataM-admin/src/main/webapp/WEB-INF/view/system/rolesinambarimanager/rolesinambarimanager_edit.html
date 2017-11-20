@@ -1,17 +1,19 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="rolesinambarimanagerInfoForm">
 
             <input type="hidden" id="id" value="${rolesinambarimanager.id}">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-
+                    <#input id="datamaccountid" name="dataM账号id" underline="true" value="${rolesinambarimanager.datamaccountid}" />
+                    <#input id="datamaccount" name="dataM账号" underline="true" value="${rolesinambarimanager.datamaccount}" />
                 </div>
 
                 <div class="col-sm-6">
-
+                    <#input id="ambariuserid" name="ambari账号id" underline="true" value="${rolesinambarimanager.ambariuserid}" />
+                    <#input id="ambariusername" name="ambari账号" underline="true" value="${rolesinambarimanager.ambariusername}" />
                 </div>
             </div>
 

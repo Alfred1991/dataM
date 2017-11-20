@@ -5,16 +5,19 @@ import com.wan.dataM.admin.common.exception.BizExceptionEnum;
 import com.wan.dataM.admin.common.exception.BussinessException;
 import com.wan.dataM.admin.common.persistence.dao.RolesinambarimanagerMapper;
 import com.wan.dataM.admin.common.persistence.model.Rolesinambarimanager;
+import com.wan.dataM.admin.core.log.LogObjectHolder;
 import com.wan.dataM.admin.modular.system.dao.RolesinambarimanagerDao;
 import com.wan.dataM.admin.modular.system.service.IRolesinambarimanagerService;
 import com.wan.dataM.core.base.controller.BaseController;
 import com.wan.dataM.core.base.tips.Tip;
+import com.wan.dataM.core.support.BeanKit;
 import com.wan.dataM.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -63,6 +66,14 @@ public class RolesinambarimanagerController extends BaseController {
      */
     @RequestMapping("/rolesinambarimanager_update/{rolesinambarimanagerId}")
     public String rolesinambarimanagerUpdate(@PathVariable Integer rolesinambarimanagerId, Model model) {
+        if (ToolUtil.isEmpty(rolesinambarimanagerId)) {
+            throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
+        }
+        Rolesinambarimanager rolesinambarimanager = this.rolesinambarimanagerMapper.selectById(rolesinambarimanagerId);
+        Map<String, Object> rolesinambarimanagerMap = BeanKit.beanToMap(rolesinambarimanager);
+
+        model.addAttribute("rolesinambarimanager", rolesinambarimanagerMap);
+        LogObjectHolder.me().set(rolesinambarimanager);
         return PREFIX + "rolesinambarimanager_edit.html";
     }
 
@@ -88,7 +99,7 @@ public class RolesinambarimanagerController extends BaseController {
         }
 
         //判断是否存在该编号
-        String existedRolesinambarimanagerDataM_account = ConstantFactory.me().getRolesinambarimanagerDataM_accountByDataM_account_id(rolesinambarimanager.getDataM_account_id());
+        String existedRolesinambarimanagerDataM_account = ConstantFactory.me().getRolesinambarimanagerDataM_accountByDataM_account_id(rolesinambarimanager.getDatamaccountid());
         if (ToolUtil.isNotEmpty(existedRolesinambarimanagerDataM_account)) {
             throw new BussinessException(BizExceptionEnum.EXISTED_THE_ROLESINAMBARIMANAGER);
         }
@@ -102,7 +113,13 @@ public class RolesinambarimanagerController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete() {
+    public Tip delete(@RequestParam Integer rolesinambarimanagerId) {
+        if (ToolUtil.isEmpty(rolesinambarimanagerId)) {
+            throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
+        }
+
+        this.rolesinambarimanagerMapper.deleteById(rolesinambarimanagerId);
+
         return SUCCESS_TIP;
     }
 
@@ -112,7 +129,12 @@ public class RolesinambarimanagerController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update() {
+    public Tip update(@Valid Rolesinambarimanager rolesinambarimanager, BindingResult result) {
+        if (result.hasErrors()) {
+            throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
+        }
+        this.rolesinambarimanagerMapper.updateById(rolesinambarimanager);
+
         return super.SUCCESS_TIP;
     }
 

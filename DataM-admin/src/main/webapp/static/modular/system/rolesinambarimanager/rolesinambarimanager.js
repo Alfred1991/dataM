@@ -15,10 +15,10 @@ Rolesinambarimanager.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
-        {title: 'dataM账号id', field: 'dataM_account_id', align: 'center', valign: 'middle', sortable: true},
-        {title: 'dataM账号', field: 'dataM_account', align: 'center', valign: 'middle', sortable: true},
-        {title: 'ambari账号id', field: 'ambari_user_id', align: 'center', valign: 'middle', sortable: true},
-        {title: 'ambari账号', field: 'ambari_user_name', align: 'center', valign: 'middle', sortable: true}
+        {title: 'dataM账号id', field: 'datamaccountid', align: 'center', valign: 'middle', sortable: true},
+        {title: 'dataM账号', field: 'datamaccount', align: 'center', valign: 'middle', sortable: true},
+        {title: 'ambari账号id', field: 'ambariuserid', align: 'center', valign: 'middle', sortable: true},
+        {title: 'ambari账号', field: 'ambariusername', align: 'center', valign: 'middle', sortable: true}
     ];
 };
 

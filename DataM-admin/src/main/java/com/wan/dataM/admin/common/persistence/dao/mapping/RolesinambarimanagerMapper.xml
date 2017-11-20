@@ -5,10 +5,10 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.wan.dataM.admin.common.persistence.model.Rolesinambarimanager">
         <id column="id" property="id" />
-        <result column="dataM_account_id" property="dataM_account_id" />
-        <result column="dataM_account" property="dataM_account" />
-        <result column="ambari_user_id" property="ambari_user_id" />
-        <result column="ambari_user_name" property="ambari_user_name" />
+        <result column="datamaccountid" property="datamaccountid" />
+        <result column="datamaccount" property="datamaccount" />
+        <result column="ambariuserid" property="ambariuserid" />
+        <result column="ambariusername" property="ambariusername" />
     </resultMap>
 
 </mapper>

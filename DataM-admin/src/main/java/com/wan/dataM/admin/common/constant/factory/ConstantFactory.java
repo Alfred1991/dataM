@@ -161,7 +161,7 @@ public class ConstantFactory implements IConstantFactory {
             if (rolesinambarimanager == null) {
                 return "";
             } else {
-                return rolesinambarimanager.getDataM_account();
+                return rolesinambarimanager.getDatamaccount();
             }
         }
     };

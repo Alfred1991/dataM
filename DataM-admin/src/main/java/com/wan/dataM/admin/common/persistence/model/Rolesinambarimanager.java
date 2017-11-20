@@ -21,19 +21,19 @@ public class Rolesinambarimanager extends Model<Rolesinambarimanager> {
     /**
      * dataM账号id
      */
-    private Integer dataM_account_id;
+    private Integer datamaccountid;
     /**
      * dataM账号
      */
-    private String dataM_account;
+    private String datamaccount;
     /**
      * ambari账号id
      */
-    private String ambari_user_id;
+    private String ambariuserid;
     /**
      * ambari账号
      */
-    private String ambari_user_name;
+    private String ambariusername;
 
     public Integer getId() {
         return id;
@@ -43,36 +43,36 @@ public class Rolesinambarimanager extends Model<Rolesinambarimanager> {
         this.id = id;
     }
 
-    public String getDataM_account() {
-        return dataM_account;
+    public String getDatamaccount() {
+        return datamaccount;
     }
 
-    public void setDataM_account(String dataM_account) {
-        this.dataM_account = dataM_account;
+    public void setDatamaccount(String datamaccount) {
+        this.datamaccount = datamaccount;
     }
 
-    public String getAmbari_user_name() {
-        return ambari_user_name;
+    public String getAmbariusername() {
+        return ambariusername;
     }
 
-    public void setAmbari_user_name(String ambari_user_name) {
-        this.ambari_user_name = ambari_user_name;
+    public void setAmbariusername(String ambariusername) {
+        this.ambariusername = ambariusername;
     }
 
-    public Integer getDataM_account_id() {
-        return dataM_account_id;
+    public Integer getDatamaccountid() {
+        return datamaccountid;
     }
 
-    public void setDataM_account_id(Integer dataM_account_id) {
-        this.dataM_account_id = dataM_account_id;
+    public void setDatamaccountid(Integer datamaccountid) {
+        this.datamaccountid = datamaccountid;
     }
 
-    public String getAmbari_user_id() {
-        return ambari_user_id;
+    public String getAmbariuserid() {
+        return ambariuserid;
     }
 
-    public void setAmbari_user_id(String ambari_user_id) {
-        this.ambari_user_id = ambari_user_id;
+    public void setAmbariuserid(String ambariuserid) {
+        this.ambariuserid = ambariuserid;
     }
 
     @Override
@@ -84,9 +84,9 @@ public class Rolesinambarimanager extends Model<Rolesinambarimanager> {
     public String toString() {
         return "Dict{" +
                 "id=" + id +
-                ", dataM_account_id=" + dataM_account_id +
-                ", dataM_account=" + dataM_account +
-                ", ambari_user_name=" + ambari_user_name +
+                ", datamaccountid=" + datamaccountid +
+                ", datamaccount=" + datamaccount +
+                ", ambariusername=" + ambariusername +
                 "}";
     }
 }

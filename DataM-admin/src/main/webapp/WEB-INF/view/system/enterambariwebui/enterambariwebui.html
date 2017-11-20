@@ -8,7 +8,8 @@
             <div class="ibox-content">
                 <div class="row row-lg">
                     <div  class="col-sm-3">
-                        <#button name="进入ambari webui" icon="fa-rocket" clickFun="Enterambariwebui.enter()" />
+                        <input type="hidden" id="token" value="${token}">
+                        <#button name="进入ambari webui" icon="fa-rocket" clickFun="enter()" />
                     </div>
                     <!--
                     <div class="col-sm-12">
@@ -40,4 +41,9 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/enterambariwebui/enterambariwebui.js"></script>
+<script>
+    function enter(){
+        window.open("https://183.61.130.171:8080?token="+$('#token').val())
+    }
+</script>
 @}

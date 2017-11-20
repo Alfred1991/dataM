@@ -4,28 +4,28 @@
 var RolesinambarimanagerInfoDlg = {
     rolesinambarimanagerInfoData : {},
     validateFields: {
-        dataM_account_id: {
+        datamaccountid: {
             validators: {
                 notEmpty: {
                     message: 'dataM账号id不能为空'
                 }
             }
         },
-        dataM_account: {
+        datamaccount: {
             validators: {
                 notEmpty: {
                     message: 'dataM账号不能为空'
                 }
             }
         },
-        ambari_user_id: {
+        ambariuserid: {
             validators: {
                 notEmpty: {
                     message: 'ambari账号id不能为空'
                 }
             }
         },
-        ambari_user_name: {
+        ambariusername: {
             validators: {
                 notEmpty: {
                     message: 'ambari账号不能为空'
@@ -74,7 +74,7 @@ RolesinambarimanagerInfoDlg.close = function() {
  * 收集数据
  */
 RolesinambarimanagerInfoDlg.collectData = function() {
-    this.set('dataM_account_id').set('dataM_account').set('ambari_user_id').set('ambari_user_name');
+    this.set('id').set('datamaccountid').set('datamaccount').set('ambariuserid').set('ambariusername');
 }
 
 /**
@@ -132,5 +132,5 @@ RolesinambarimanagerInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-    Feng.initValidator("RolesinambarimanagerInfoForm", RolesinambarimanagerInfoDlg.validateFields);
+    Feng.initValidator("rolesinambarimanagerInfoForm", RolesinambarimanagerInfoDlg.validateFields);
 });
