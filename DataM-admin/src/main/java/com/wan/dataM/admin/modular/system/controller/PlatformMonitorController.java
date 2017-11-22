@@ -4,16 +4,23 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.wan.dataM.admin.common.annotion.BussinessLog;
 import com.wan.dataM.admin.common.constant.Dict;
 import com.wan.dataM.admin.common.constant.factory.PageFactory;
+import com.wan.dataM.admin.common.exception.BizExceptionEnum;
+import com.wan.dataM.admin.common.exception.BussinessException;
 import com.wan.dataM.admin.common.persistence.dao.MonitorDefinitionMapper;
 import com.wan.dataM.admin.common.persistence.model.MonitorDefinition;
 import com.wan.dataM.admin.common.persistence.model.OperationLog;
+import com.wan.dataM.admin.core.log.LogObjectHolder;
 import com.wan.dataM.admin.modular.system.dao.PlatformMonitorDao;
+import com.wan.dataM.admin.modular.system.service.IPlatformMonitorService;
 import com.wan.dataM.admin.modular.system.warpper.LogWarpper;
 import com.wan.dataM.core.base.controller.BaseController;
+import com.wan.dataM.core.support.BeanKit;
+import com.wan.dataM.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -34,8 +41,11 @@ public class PlatformMonitorController extends BaseController {
     @Resource
     private PlatformMonitorDao platformMonitorDao;
 
-    @Resource
-    private MonitorDefinitionMapper monitorDefinitionMapper;
+//    @Resource
+//    private MonitorDefinitionMapper monitorDefinitionMapper;
+//
+//    @Resource
+//    IPlatformMonitorService platformMonitorService;
 
 
     /**
@@ -59,6 +69,20 @@ public class PlatformMonitorController extends BaseController {
      */
     @RequestMapping("/platformMonitor_update/{platformMonitorId}")
     public String platformMonitorUpdate(@PathVariable Integer platformMonitorId, Model model) {
+        //判断传进来的ID是否为空
+        if (ToolUtil.isEmpty(platformMonitorId)) {
+            throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
+        }
+
+        System.out.println("select MonitorId = " + platformMonitorId);
+        Map<String,Object> monitorDefinition = this.platformMonitorDao.selPlatformMonitorBymonitorId(platformMonitorId);
+
+//        Map<String, Object> monitorDefinitionMap = BeanKit.beanToMap(monitorDefinition);
+
+        model.addAttribute("monitorDefinition", monitorDefinition);
+//        System.out.println("map = " + monitorDefinition.get("definition_id"));
+//        LogObjectHolder.me().set(monitorDefinition);
+
         return PREFIX + "platformMonitor_edit.html";
     }
 
@@ -70,7 +94,7 @@ public class PlatformMonitorController extends BaseController {
     public Object list(String condition) {
 
         Page<OperationLog> page = new PageFactory<OperationLog>().defaultPage();
-        List<Map<String, Object>> result = platformMonitorDao.getPlatformMonitorDefinitions(page,page.getOrderByField(), page.isAsc());
+        List<Map<String, Object>> result = platformMonitorDao.selectPlatformMonitor(condition);
         page.setRecords((List<OperationLog>) new LogWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -83,13 +107,21 @@ public class PlatformMonitorController extends BaseController {
     @ResponseBody
     public Object add(MonitorDefinition monitorDefinition) {
         Integer definitionId = monitorDefinition.getDefinition_id();
+        System.out.println("definitionId = " + definitionId);
+
+        //判断是否已经存在该编号
         Map<String,Object> result = platformMonitorDao.getPlatformMonitorDefinitionByDefinitionId(definitionId);
         if(null != result && result.size() > 0){
             return super.DUPLICATED;
         }
-        platformMonitorDao.insertPlatformMonitorDefinition(monitorDefinition.getDefinition_id(),monitorDefinition.getDefinition_name(),
-                monitorDefinition.getService_name(),monitorDefinition.getComponent_name(),
-                monitorDefinition.getSchedule_interval(),monitorDefinition.getAlert_label());
+
+        //添加告警信息到数据库中
+        platformMonitorDao.insertPlatformMonitorDefinition(monitorDefinition.getDefinition_id(), monitorDefinition.getDefinition_name(),
+                monitorDefinition.getService_name(), monitorDefinition.getComponent_name(),
+                monitorDefinition.getSchedule_interval(), monitorDefinition.getAlert_label(),
+                monitorDefinition.getAlert_type(),monitorDefinition.getAlert_content(),
+                monitorDefinition.getCan_auto_recover(),monitorDefinition.getAuto_recover_api());
+
         return super.SUCCESS_TIP;
     }
 
@@ -97,8 +129,14 @@ public class PlatformMonitorController extends BaseController {
      * 删除平台监控管理
      */
     @RequestMapping(value = "/delete")
+    @BussinessLog(value = "删除平台监控管理", key = "definitionID", dict = Dict.DeleteDict)
     @ResponseBody
-    public Object delete() {
+    public Object delete(@RequestParam Integer platformMonitorId) {
+        if (ToolUtil.isEmpty(platformMonitorId)) {
+            throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
+        }
+        System.out.println("del monitorID = " + platformMonitorId);
+        this.platformMonitorDao.delPlatformMonitorById(platformMonitorId);
         return SUCCESS_TIP;
     }
 
@@ -108,7 +146,25 @@ public class PlatformMonitorController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update() {
+    public Object update(MonitorDefinition monitorDefinition) {
+       Integer definitionId = monitorDefinition.getDefinition_id();
+        System.out.println("definitionId = " + definitionId);
+        //判断是否已经存在该definition_ID
+        Map<String,Object> result = platformMonitorDao.getPlatformMonitorDefinitionByDefinitionId(definitionId);
+        if(null != result && result.size() > 0){
+            return super.DUPLICATED;
+        }
+        System.out.println("begin to exe update the getMonitor_id() = " + monitorDefinition.getMonitor_id());
+        //修改告警信息到数据库中
+        boolean flag = platformMonitorDao.updatePlatformMonitorDefinition(monitorDefinition.getMonitor_id(),
+                monitorDefinition.getDefinition_id(), monitorDefinition.getDefinition_name(),
+                monitorDefinition.getService_name(), monitorDefinition.getComponent_name(),
+                monitorDefinition.getSchedule_interval(), monitorDefinition.getAlert_label(),
+                monitorDefinition.getAlert_type(),monitorDefinition.getAlert_content(),
+                monitorDefinition.getCan_auto_recover(),monitorDefinition.getAuto_recover_api());
+
+        System.out.println("flag = " + flag);
+        System.out.println("Success ！ " );
         return super.SUCCESS_TIP;
     }
 

@@ -44,7 +44,7 @@ PlatformMonitorInfoDlg.close = function() {
  * 收集数据
  */
 PlatformMonitorInfoDlg.collectData = function() {
-    this.set('id');
+    this.set('monitor_id').set('definition_id').set('definition_name').set('service_name').set('component_name').set('schedule_interval').set('alert_label').set('alert_type').set("alert_content").set('can_auto_recover').set('auto_recover_api');
 }
 
 /**
@@ -88,5 +88,19 @@ PlatformMonitorInfoDlg.editSubmit = function() {
 }
 
 $(function() {
+    Feng.initValidator("monitorDefinitionInfoForm", PlatformMonitorInfoDlg.validateFields);
 
+    alert
+    //初始化是否是菜单
+    if($("#alert_type_Value").val() == undefined){
+        $("#alert_type").val(0);
+    }else{
+        $("#alert_type").val($("#alert_type_Value").val());
+    }
+
+    if($("#can_auto_recover_Value").val() == undefined){
+        $("#can_auto_recover").val(0);
+    }else{
+        $("#can_auto_recover").val($("#can_auto_recover_Value").val());
+    }
 });

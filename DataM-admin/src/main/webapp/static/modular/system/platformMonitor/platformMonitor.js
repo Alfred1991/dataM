@@ -62,7 +62,7 @@ PlatformMonitor.openPlatformMonitorDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/platformMonitor/platformMonitor_update/' + PlatformMonitor.seItem.id
+            content: Feng.ctxPath + '/platformMonitor/platformMonitor_update/' + PlatformMonitor.seItem.monitor_id
         });
         this.layerIndex = index;
     }
@@ -73,13 +73,14 @@ PlatformMonitor.openPlatformMonitorDetail = function () {
  */
 PlatformMonitor.delete = function () {
     if (this.check()) {
+
         var ajax = new $ax(Feng.ctxPath + "/platformMonitor/delete", function (data) {
             Feng.success("删除成功!");
             PlatformMonitor.table.refresh();
         }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
+            Feng.error("删除失败!" + data.responseJSON.message + "!  " + PlatformMonitor.seItem.id);
         });
-        ajax.set("platformMonitorId",this.seItem.id);
+        ajax.set("platformMonitorId",PlatformMonitor.seItem.monitor_id);
         ajax.start();
     }
 };
