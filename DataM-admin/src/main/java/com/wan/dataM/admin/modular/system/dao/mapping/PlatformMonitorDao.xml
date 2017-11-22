@@ -18,7 +18,7 @@
                 </choose>
             </when>
             <otherwise>
-                order by monitor_id ASC
+                order by monitorId ASC
             </otherwise>
         </choose>
     </select>
@@ -26,13 +26,13 @@
     <select id="getPlatformMonitorDefinitionByDefinitionId" resultType="map">
         select * from dataM.dm_monitor_info where 1 = 1
         <if test="definitionId != null and definitionId != ''">
-            and definition_id = #{definitionId}
+            and definitionId = #{definitionId}
         </if>
     </select>
 
 
     <insert id="insertPlatformMonitorDefinition" parameterType="java.util.Map">
-        insert into dataM.dm_monitor_info(definition_id,definition_name,service_name,component_name,schedule_interval,alert_label,alert_content,auto_recover_api)
+        insert into dataM.dm_monitor_info(definitionId,definitionName,serviceName,componentName,scheduleInterval,alertLabel,alertContent,autoRecoverApi)
         values (#{definitionId},#{definitionName},#{serviceName},#{componentName},#{scheduleInterval},#{alertLabel},"","");
     </insert>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wan.dataM.admin.common.persistence.dao.DmAlertInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wan.dataM.admin.common.persistence.model.DmAlertInfo">
+        <id column="id" property="id" />
+        <result column="monitorId" property="monitorId" />
+        <result column="definitionId" property="definitionId" />
+        <result column="serviceName" property="serviceName" />
+        <result column="componentName" property="componentName" />
+        <result column="host_name" property="host_name" />
+        <result column="alert_id" property="alert_id" />
+        <result column="alertType" property="alertType" />
+        <result column="alert_time" property="alert_time" />
+        <result column="alert_send_count" property="alert_send_count" />
+        <result column="alert_send_last_time" property="alert_send_last_time" />
+        <result column="alert_recover_id" property="alert_recover_id" />
+        <result column="auto_recover_retry_count" property="auto_recover_retry_count" />
+        <result column="auto_recover_last_time" property="auto_recover_last_time" />
+        <result column="recover_time" property="recover_time" />
+    </resultMap>
+
+</mapper>

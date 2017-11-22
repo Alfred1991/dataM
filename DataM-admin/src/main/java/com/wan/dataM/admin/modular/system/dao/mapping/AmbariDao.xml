@@ -5,7 +5,7 @@
     <select id="getAmbariAlertDefinitions" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
         select * from ambari.alert_definition where 1 = 1
         <if test="definitionName != null and definitionName != ''">
-            and definition_name like CONCAT('%',#{definitionName},'%')
+            and definitionName like CONCAT('%',#{definitionName},'%')
         </if>
         <choose>
             <when test="orderByField != null and orderByField !=''">
@@ -19,7 +19,7 @@
                 </choose>
             </when>
             <otherwise>
-                order by definition_id DESC
+                order by definitionId DESC
             </otherwise>
         </choose>
     </select>
@@ -28,7 +28,7 @@
     <select id="getAmbariAlertDefinitionById" resultType="map" >
         select * from ambari.alert_definition where 1 = 1
         <if test="ambariId != null and ambariId != ''">
-            and definition_id = ${ambariId}
+            and definitionId = ${ambariId}
         </if>
     </select>
 

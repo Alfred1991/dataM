@@ -1,0 +1,86 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>ambari自动恢复管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        @if(shiro.hasPermission("/ambariautorecover/operation")){
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input type="hidden" id="recoverMessage" value="${isstarted}">
+                                <#button id="isstarted" name="${isstarted}" icon="fa-rocket" clickFun="operation()" />
+                            </div>
+                        </div>
+                        @}
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="definition_id" name="告警定义id" />
+                                <#NameCon id="alert_id" name="告警id" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="alert_time_begin" name="告警时间起" />
+                                <#NameCon id="alert_time_end" name="告警时间止" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="host_name" name="主机名" />
+                                <#NameCon id="service_name" name="服务名称" /></div>
+                            <div class="col-sm-3">
+                                <#NameCon id="component_name" name="组件名称" />
+                                <#button name="搜索" icon="fa-search" clickFun="Ambariautorecover.search()"/>
+                            </div>
+                        </div>
+                        <!--<div class="hidden-xs" id="AmbariautorecoverTableToolbar" role="group">
+                            @if(shiro.hasPermission("/ambariautorecover/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="Ambariautorecover.openAddAmbariautorecover()"/>
+                            @}
+                            @if(shiro.hasPermission("/ambariautorecover/update")){
+                                <#button name="修改" icon="fa-plus" clickFun="Ambariautorecover.openAmbariautorecoverDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/ambariautorecover/delete")){
+                                <#button name="删除" icon="fa-plus" clickFun="Ambariautorecover.delete()" space="true"/>
+                            @}
+                        </div>-->
+                        <#table id="AmbariautorecoverTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/ambariautorecover/ambariautorecover.js"></script>
+<script>
+    function operation(){
+
+        var message = $("#recoverMessage").val();
+
+        var operation = "start";
+
+        var newmessage = "停止自动恢复";
+
+        if(message=="停止自动恢复"){
+            newmessage="启动自动恢复"
+            operation="stop";
+        }
+
+        var ajax = new $ax(Feng.ctxPath + "/ambariautorecover/operation", function (data) {
+
+            $("#recoverMessage").val(newmessage);
+
+            var newhtml = document.getElementById("isstarted").innerHTML.replace(message,newmessage);
+
+            document.getElementById("isstarted").innerHTML=newhtml;
+
+            Feng.success("操作成功!");
+        }, function (data) {
+            Feng.error("操作失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set("operation",operation);
+        ajax.start();
+
+    }
+</script>
+@}

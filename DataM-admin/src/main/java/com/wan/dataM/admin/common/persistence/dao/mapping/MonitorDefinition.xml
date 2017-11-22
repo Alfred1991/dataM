@@ -4,19 +4,19 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.wan.dataM.admin.common.persistence.model.MonitorDefinition">
-        <id column="monitor_id" property="monitor_id" />
-        <result column="definition_id" property="definition_id" />
-        <result column="definition_name" property="definition_name" />
-        <result column="service_name" property="service_name" />
-        <result column="component_name" property="component_name" />
-        <result column="schedule_interval" property="schedule_interval" />
-        <result column="alert_label" property="alert_label" />
-        <result column="alert_type" property="alert_type" />
-        <result column="alert_content" property="alert_content" />
-        <result column="can_auto_recover" property="can_auto_recover" />
-        <result column="auto_recover_api" property="auto_recover_api" />
-        <result column="create_time" property="create_time" />
-        <result column="modify_time" property="modify_time" />
+        <id column="monitorId" property="monitorId" />
+        <result column="definitionId" property="definitionId" />
+        <result column="definitionName" property="definitionName" />
+        <result column="serviceName" property="serviceName" />
+        <result column="componentName" property="componentName" />
+        <result column="scheduleInterval" property="scheduleInterval" />
+        <result column="alertLabel" property="alertLabel" />
+        <result column="alertType" property="alertType" />
+        <result column="alertContent" property="alertContent" />
+        <result column="canAutoRecover" property="canAutoRecover" />
+        <result column="autoRecoverApi" property="autoRecoverApi" />
+        <result column="createTime" property="createTime" />
+        <result column="modifyTime" property="modifyTime" />
         <result column="desc" property="desc" />
     </resultMap>
 

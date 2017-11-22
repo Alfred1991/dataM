@@ -4,17 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.wan.dataM.admin.common.persistence.model.AlertDefinition">
-        <id column="definition_id" property="id" />
+        <id column="definitionId" property="id" />
         <result column="cluster_id" property="avatar" />
-        <result column="definition_name" property="account" />
-        <result column="service_name" property="password" />
-        <result column="component_name" property="salt" />
+        <result column="definitionName" property="account" />
+        <result column="serviceName" property="password" />
+        <result column="componentName" property="salt" />
         <result column="scope" property="name" />
         <result column="label" property="birthday" />
         <result column="help_url" property="sex" />
         <result column="description" property="email" />
         <result column="enabled" property="enabled" />
-        <result column="schedule_interval" property="schedule_interval" />
+        <result column="scheduleInterval" property="scheduleInterval" />
         <result column="source_type" property="source_type" />
         <result column="alert_source" property="alert_source" />
         <result column="hash" property="hash" />
