@@ -23,48 +23,52 @@ public class AlertController {
 
 
     public  static void exeAlert(int id,String status) {
-//        System.out.println("id = " + id);
+
         AlertMgrDao alertMgrDao = (AlertMgrDao) SpringContextHolder.getBean("alertMgrDao");
         Map<String, Object> DM_monitor_info = alertMgrDao.selectDM_alert_info(id);
-//        // 将Map的数据输出到控制台(未排序)
-//        for(Map.Entry<String,Object> entry: DM_monitor_info.entrySet()){
-//            System.out.println(entry.getKey()+" = "+entry.getValue());
-//        }
 
-            if((Integer)DM_monitor_info.get("alert_send_count") == 0){
-                wechatAlert((String)DM_monitor_info.get("alert_content"));
+        if(Integer.valueOf(status) == 0){
+            wechatAlert("Success recovery! The alert_content is : " + (String)DM_monitor_info.get("alert_content"));
+        }else {
+            //判断alert_send_count是否为0，若是，则发送报警
+            if ((Integer) DM_monitor_info.get("alert_send_count") == 0) {
+                wechatAlert((String) DM_monitor_info.get("alert_content"));
                 alertMgrDao.updateDM_alert_info(id);
-            }else{
+            } else {
+                //判断上一次报警时间是否大于schedule_interval的十倍，若是，则发送报警
                 SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String last = DM_monitor_info.get("alert_send_last_time").toString();
                 String now = simpleFormat.format(new Date());
-//                System.out.println(last);
-//                System.out.println(now);
                 long from = 0;
                 long to = 0;
                 try {
-                     from = simpleFormat.parse(last).getTime();
-                     to = simpleFormat.parse(now).getTime();
-                }catch(Exception e ){
+                    from = simpleFormat.parse(last).getTime();
+                    to = simpleFormat.parse(now).getTime();
+                } catch (Exception e) {
                     System.out.println("convert time fail!");
                     e.printStackTrace();
                 }
-                int minutes = (int) ((to - from)/(1000 * 60));
+                int minutes = (int) ((to - from) / (1000 * 60));
                 System.out.println("minuties = " + minutes);
-                if(minutes >= ((Integer)DM_monitor_info.get("schedule_interval") * 10)){
-                    wechatAlert((String)DM_monitor_info.get("alert_content"));
+                if (minutes >= ((Integer) DM_monitor_info.get("schedule_interval") * 10)) {
+                    wechatAlert((String) DM_monitor_info.get("alert_content"));
                     alertMgrDao.updateDM_alert_info(id);
-                }else{
+                } else {
                     System.out.println("don't need to alert!");
                 }
             }
-
+        }
 
 
 
     }
 
-    public static  boolean wechatAlert(String content){
+    /**
+     *
+     * @param content =  报警内容
+     * @return boolean结果
+     */
+    public static boolean wechatAlert(String content){
         boolean flag=false;
         System.out.println("exe wechat alert!");
         String api_sn = "21a490efa7604554";
