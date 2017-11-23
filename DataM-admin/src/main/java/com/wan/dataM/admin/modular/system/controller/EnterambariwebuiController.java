@@ -45,7 +45,7 @@ public class EnterambariwebuiController extends BaseController {
         rolesinambarimanager.setDatamaccountid(id);
         rolesinambarimanager = rolesinambarimanagerMapper.selectOne(rolesinambarimanager);
         Dmambariuser dmambariuser = new Dmambariuser();
-        dmambariuser.setId(rolesinambarimanager.getAmbariuserid());
+        dmambariuser.setId(Integer.valueOf(rolesinambarimanager.getAmbariuserid()));
         dmambariuser = dmambariuserMapper.selectOne(dmambariuser);
         String token = URLEncoder.encode(dmambariuser.getUserpassword());
         String nname = URLEncoder.encode(dmambariuser.getUsername());
