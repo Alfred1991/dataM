@@ -33,7 +33,7 @@ var UserInfoDlg = {
                 identical: {
                     field: 'rePassword',
                     message: '两次密码不一致'
-                }
+                },
             }
         },
         rePassword: {
@@ -44,7 +44,7 @@ var UserInfoDlg = {
                 identical: {
                     field: 'password',
                     message: '两次密码不一致'
-                }
+                },
             }
         }
     }
@@ -142,7 +142,7 @@ UserInfoDlg.hideDeptSelectTree = function () {
  * 收集数据
  */
 UserInfoDlg.collectData = function () {
-    this.set('id').set('account').set('sex').set('password').set('avatar').set('roleid')
+    this.set('id').set('account').set('sex').set('password').set('avatar')
         .set('email').set('name').set('birthday').set('rePassword').set('deptid').set('phone');
 };
 

@@ -62,10 +62,6 @@ public class PlatformMonitorController extends BaseController {
      */
     @RequestMapping("/platformMonitor_add")
     public String platformMonitorAdd() {
-
-//        System.out.println("exeAlert ! ");
-//        new AlertController().exeAlert(37, "Critical");
-//        new AlertController().exeAlert(38,"Critical");
         return PREFIX + "platformMonitor_add.html";
     }
 
@@ -87,6 +83,9 @@ public class PlatformMonitorController extends BaseController {
         model.addAttribute("monitorDefinition", monitorDefinition);
 //        System.out.println("map = " + monitorDefinition.get("definition_id"));
 //        LogObjectHolder.me().set(monitorDefinition);
+
+        System.out.println("exeAlert ! ");
+        new AlertController().exeAlert(37,"Critical");
 
         return PREFIX + "platformMonitor_edit.html";
     }

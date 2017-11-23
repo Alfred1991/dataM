@@ -3,8 +3,8 @@ package com.wan.dataM.admin.modular.system.controller;
 import com.wan.dataM.admin.modular.system.dao.AlertMgrDao;
 import com.wan.dataM.core.util.SpringContextHolder;
 
-import javax.annotation.Resource;
-import java.io.BufferedReader;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,9 +14,6 @@ import java.util.Map;
  * Created by Administrator on 2017/11/22.
  */
 public class AlertController {
-
-    @Resource
-    private AlertMgrDao alertMgrDao;
 
 
 
@@ -36,9 +33,8 @@ public class AlertController {
             } else {
                 //判断上一次报警时间是否大于schedule_interval的十倍，若是，则发送报警
                 SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String last = (String)DM_monitor_info.get("alert_send_last_time");
+                String last = DM_monitor_info.get("alert_send_last_time").toString();
                 String now = simpleFormat.format(new Date());
-
                 long from = 0;
                 long to = 0;
                 try {
@@ -48,7 +44,6 @@ public class AlertController {
                     System.out.println("convert time fail!");
                     e.printStackTrace();
                 }
-
                 int minutes = (int) ((to - from) / (1000 * 60));
                 System.out.println("minuties = " + minutes);
                 if (minutes >= ((Integer) DM_monitor_info.get("schedule_interval") * 10)) {
@@ -63,7 +58,6 @@ public class AlertController {
 
 
     }
-
 
     /**
      *
@@ -140,5 +134,6 @@ public class AlertController {
 
         return flag;
     }
+
 
 }
