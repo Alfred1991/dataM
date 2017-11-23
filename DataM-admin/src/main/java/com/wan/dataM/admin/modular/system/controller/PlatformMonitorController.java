@@ -10,6 +10,7 @@ import com.wan.dataM.admin.common.persistence.dao.MonitorDefinitionMapper;
 import com.wan.dataM.admin.common.persistence.model.MonitorDefinition;
 import com.wan.dataM.admin.common.persistence.model.OperationLog;
 import com.wan.dataM.admin.core.log.LogObjectHolder;
+import com.wan.dataM.admin.modular.system.dao.AlertMgrDao;
 import com.wan.dataM.admin.modular.system.dao.PlatformMonitorDao;
 import com.wan.dataM.admin.modular.system.service.IPlatformMonitorService;
 import com.wan.dataM.admin.modular.system.warpper.LogWarpper;
@@ -82,6 +83,9 @@ public class PlatformMonitorController extends BaseController {
         model.addAttribute("monitorDefinition", monitorDefinition);
 //        System.out.println("map = " + monitorDefinition.get("definition_id"));
 //        LogObjectHolder.me().set(monitorDefinition);
+
+        System.out.println("exeAlert ! ");
+        new AlertController().exeAlert(37,"Critical");
 
         return PREFIX + "platformMonitor_edit.html";
     }

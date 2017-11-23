@@ -18,6 +18,7 @@ public class AlertController {
 
 
     public  void exeAlert(int id,String status) {
+        System.out.println("id = " + id);
        Map<String, Object> DM_monitor_info = alertMgrDao.selectDM_alert_info(id);
 
             if((Integer)DM_monitor_info.get("alert_send_count") == 0){
@@ -53,7 +54,7 @@ public class AlertController {
     }
 
     public void wechatAlert(String content){
-
+        System.out.println("WeChat Alert!");
     }
     public static void main(String[] args){
         AlertController a = new AlertController();

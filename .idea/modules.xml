@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/DataM-admin/DataM-admin.iml" filepath="$PROJECT_DIR$/DataM-admin/DataM-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataM-core/DataM-core.iml" filepath="$PROJECT_DIR$/DataM-core/DataM-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataM-parent/DataM-parent.iml" filepath="$PROJECT_DIR$/DataM-parent/DataM-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataM-parent/DataM-parent.iml" filepath="$PROJECT_DIR$/DataM-parent/DataM-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/dataM.iml" filepath="$PROJECT_DIR$/.idea/dataM.iml" />
     </modules>
   </component>
