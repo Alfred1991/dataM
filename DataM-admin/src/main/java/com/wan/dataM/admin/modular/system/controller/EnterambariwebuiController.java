@@ -47,8 +47,10 @@ public class EnterambariwebuiController extends BaseController {
         Dmambariuser dmambariuser = new Dmambariuser();
         dmambariuser.setId(rolesinambarimanager.getAmbariuserid());
         dmambariuser = dmambariuserMapper.selectOne(dmambariuser);
-        String token= URLEncoder.encode(dmambariuser.getUserpassword());
+        String token = URLEncoder.encode(dmambariuser.getUserpassword());
+        String nname = URLEncoder.encode(dmambariuser.getUsername());
         model.addAttribute("token", token);
+        model.addAttribute("nname", nname);
         return PREFIX + "enterambariwebui.html";
     }
 
