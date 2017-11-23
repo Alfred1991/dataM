@@ -14,6 +14,7 @@ public class DataMProperties {
 
     public static final String PREFIX = "dataM";
 
+    //是否开启验证码
     private Boolean kaptchaOpen = false;
 
     private Boolean swaggerOpen = false;

@@ -71,6 +71,7 @@ public class MenuController extends BaseController {
     @Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/menu_edit/{menuId}")
     public String menuEdit(@PathVariable Integer menuId, Model model) {
+        //判断传进来的ID是否为空
         if (ToolUtil.isEmpty(menuId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -97,7 +98,7 @@ public class MenuController extends BaseController {
     }
 
     /**
-     * 修该菜单
+     * 修改菜单
      */
     @Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/edit")

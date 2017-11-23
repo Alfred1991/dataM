@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wan.dataM.admin.modular.system.dao.AlterMgrDao">
+
+        <select id="selectDM_alert_info" resultType="map">
+                select a.id,a.monitor_id,a.alert_send_count,a.alert_send_last_time,b.schedule_interval,b.alert_content from dm_alert_info a,dm_monitor_info b
+                where b.monitor_id = (select monitor_id from dm_alert_info where id = #{id}) and id = #{id};
+        </select>
+
+        <update id="updateDM_alert_info">
+                update dm_alert_info set alert_send_count = (select * from (select alert_send_count from dm_alert_info where id = #{id}) t) + 1,alert_send_last_time = now() where id = #{id};
+        </update>
+
+</mapper>

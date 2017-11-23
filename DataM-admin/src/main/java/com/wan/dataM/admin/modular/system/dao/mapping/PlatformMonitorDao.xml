@@ -5,7 +5,6 @@
 
     <select id="getPlatformMonitorDefinitions" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
         select * from dataM.dm_monitor_info where 1 = 1
-
         <choose>
             <when test="orderByField != null and orderByField !=''">
                 <choose>
@@ -23,18 +22,46 @@
         </choose>
     </select>
 
-    <select id="getPlatformMonitorDefinitionByDefinitionId" resultType="map">
+
+    <select id="selectPlatformMonitor" resultType="map">
         select * from dataM.dm_monitor_info where 1 = 1
-        <if test="definitionId != null and definitionId != ''">
-            and definitionId = #{definitionId}
+        <if test="condition != null and condition != ''">
+            and (definition_name like CONCAT('%',#{condition},'%') or definition_id like CONCAT('%',#{condition},'%'))
         </if>
     </select>
 
 
+    <select id="getPlatformMonitorDefinitionByDefinitionId" resultType="map">
+        select * from dataM.dm_monitor_info where 1 = 1
+        <if test="definitionId != null and definitionId != ''">
+            and definition_id = #{definitionId}
+        </if>
+    </select>
+
+    <select id="selPlatformMonitorBymonitorId"  resultType="map">
+        select * from dataM.dm_monitor_info where monitor_id = #{MonitorId};
+    </select>
+
+
     <insert id="insertPlatformMonitorDefinition" parameterType="java.util.Map">
-        insert into dataM.dm_monitor_info(definitionId,definitionName,serviceName,componentName,scheduleInterval,alertLabel,alertContent,autoRecoverApi)
-        values (#{definitionId},#{definitionName},#{serviceName},#{componentName},#{scheduleInterval},#{alertLabel},"","");
+
+        insert into dataM.dm_monitor_info
+                (definition_id,definition_name,service_name,component_name,schedule_interval,alert_label,alert_type,alert_content,can_auto_recover,auto_recover_api)
+        values (#{definitionId},#{definitionName},#{serviceName},#{componentName},#{scheduleInterval},#{alertLabel},#{alertType},#{alertContent},#{canAutoRecover},#{autoRecoverAPI});
+
     </insert>
+
+    <delete id="delPlatformMonitorById" parameterType="java.util.Map">
+        delete from dataM.dm_monitor_info where monitor_id = #{MonitorId};
+    </delete>
+
+    <update id="updatePlatformMonitorDefinition" parameterType="java.util.Map">
+        update dataM.dm_monitor_info set definition_id = #{definitionId},definition_name = #{definitionName},
+        service_name = #{serviceName},component_name = #{componentName},schedule_interval = #{scheduleInterval},
+        alert_label = #{alertLabel},alert_type = #{alertType},alert_content = #{alertContent},
+        can_auto_recover = #{canAutoRecover},auto_recover_api = #{autoRecoverAPI},modify_time = now()
+        where monitor_id = #{monitorId};
+    </update>
 
 
 
