@@ -29,7 +29,7 @@ public class Rolesinambarimanager extends Model<Rolesinambarimanager> {
     /**
      * ambari账号id
      */
-    private String ambariuserid;
+    private Integer ambariuserid;
     /**
      * ambari账号
      */
@@ -67,11 +67,11 @@ public class Rolesinambarimanager extends Model<Rolesinambarimanager> {
         this.datamaccountid = datamaccountid;
     }
 
-    public String getAmbariuserid() {
+    public Integer getAmbariuserid() {
         return ambariuserid;
     }
 
-    public void setAmbariuserid(String ambariuserid) {
+    public void setAmbariuserid(Integer ambariuserid) {
         this.ambariuserid = ambariuserid;
     }
 
