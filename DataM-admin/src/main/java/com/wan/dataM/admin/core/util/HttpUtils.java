@@ -123,8 +123,13 @@ public class HttpUtils {
 
                 String maintenance = jo.getJSONObject("HostRoles").getString("maintenance_state");
 
-                if(!desired_status.equalsIgnoreCase("STARTED")&&maintenance.equalsIgnoreCase("OFF")){
-                    ret=false;
+                String status = jo.getJSONObject("HostRoles").getString("maintenance_state");
+
+                //如果 desired_status != status 则认为是非ambari的正常关闭
+                if(maintenance.equalsIgnoreCase("OFF")){
+                    if(!desired_status.equalsIgnoreCase(status) && "STARTED".equalsIgnoreCase(desired_status)){
+                        ret=false;
+                    }
                 }
 
             }else{
