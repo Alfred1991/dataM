@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wan.dataM.admin.modular.system.dao.AlterMgrDao">
+<mapper namespace="com.wan.dataM.admin.modular.system.dao.AlertMgrDao">
 
         <select id="selectDM_alert_info" resultType="map">
                 select a.id,a.monitor_id,a.alert_send_count,a.alert_send_last_time,b.schedule_interval,b.alert_content from dm_alert_info a,dm_monitor_info b
