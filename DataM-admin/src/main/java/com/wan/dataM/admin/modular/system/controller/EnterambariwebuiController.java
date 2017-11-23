@@ -1,7 +1,9 @@
 package com.wan.dataM.admin.modular.system.controller;
 
 import com.wan.dataM.admin.common.persistence.dao.DmambariuserMapper;
+import com.wan.dataM.admin.common.persistence.dao.RolesinambarimanagerMapper;
 import com.wan.dataM.admin.common.persistence.model.Dmambariuser;
+import com.wan.dataM.admin.common.persistence.model.Rolesinambarimanager;
 import com.wan.dataM.admin.core.shiro.ShiroKit;
 import com.wan.dataM.admin.core.shiro.ShiroUser;
 import com.wan.dataM.core.base.controller.BaseController;
@@ -28,6 +30,9 @@ public class EnterambariwebuiController extends BaseController {
     @Resource
     DmambariuserMapper dmambariuserMapper;
 
+    @Resource
+    RolesinambarimanagerMapper rolesinambarimanagerMapper;
+
 
     /**
      * 跳转到进入ambari webui首页
@@ -36,7 +41,12 @@ public class EnterambariwebuiController extends BaseController {
     public String index(Model model) {
         ShiroUser shiroUser = ShiroKit.getUser();
         Integer id = shiroUser.getId();
-        Dmambariuser dmambariuser = dmambariuserMapper.selectById(id);
+        Rolesinambarimanager rolesinambarimanager = new Rolesinambarimanager();
+        rolesinambarimanager.setDatamaccountid(id);
+        rolesinambarimanager = rolesinambarimanagerMapper.selectOne(rolesinambarimanager);
+        Dmambariuser dmambariuser = new Dmambariuser();
+        dmambariuser.setId(rolesinambarimanager.getAmbariuserid());
+        dmambariuser = dmambariuserMapper.selectOne(dmambariuser);
         String token= URLEncoder.encode(dmambariuser.getUserpassword());
         model.addAttribute("token", token);
         return PREFIX + "enterambariwebui.html";
