@@ -5,6 +5,7 @@ import com.wan.dataM.admin.common.persistence.dao.DmMonitorInfoMapper;
 import com.wan.dataM.admin.common.persistence.model.DmAlertInfo;
 import com.wan.dataM.admin.common.persistence.model.DmMonitorInfo;
 import com.wan.dataM.admin.core.util.HttpUtils;
+import com.wan.dataM.admin.modular.system.controller.AlertController;
 import com.wan.dataM.admin.modular.system.dao.AmbariautorecoverDao;
 import com.wan.dataM.admin.modular.system.service.IAmbariautorecoverService;
 import org.springframework.stereotype.Service;
@@ -87,14 +88,17 @@ public class AmbariautorecoverServiceImpl implements IAmbariautorecoverService {
             List<DmAlertInfo> criticals_dais = convertMaps2Dmalertinfo(criticals_alert_history);
 
             for(DmAlertInfo dai:criticals_dais) {
+
                 DmAlertInfo criticals_dai = AmbariautorecoverServiceImpl.this.dmalertinfoMapper.selectOne(dai);
                 if(criticals_dai==null){
                     AmbariautorecoverServiceImpl.this.dmalertinfoMapper.insert(dai);
-
-                    //此处调用告警api
-                    System.out.println(dai.getId());
-
                 }
+
+                DmAlertInfo criticals_dai_afterinsert = AmbariautorecoverServiceImpl.this.dmalertinfoMapper.selectOne(dai);
+                //此处调用告警api
+                if(criticals_dai_afterinsert.getAlertType()==1)
+                    AlertController.exeAlert(criticals_dai_afterinsert.getId(),"1");
+
             }
         }
 
@@ -115,7 +119,8 @@ public class AmbariautorecoverServiceImpl implements IAmbariautorecoverService {
                     AmbariautorecoverServiceImpl.this.dmalertinfoMapper.updateById(oks_dai);
 
                     //此处调用恢复api
-
+                    if(oks_dai.getAlertType()==1)
+                        AlertController.exeAlert(oks_dai.getId(),"0");
                 }
             }
         }
