@@ -62,6 +62,7 @@ public class PlatformMonitorController extends BaseController {
      */
     @RequestMapping("/platformMonitor_add")
     public String platformMonitorAdd() {
+
         return PREFIX + "platformMonitor_add.html";
     }
 
