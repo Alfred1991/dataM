@@ -54,6 +54,10 @@ public class HttpUtils {
                     body.append("\r\n");
                 }
 
+                bis.close();
+
+                isr.close();
+
                 JSONObject jo = JSON.parseObject(body.toString());
 
                 String status = jo.getJSONObject("Requests").getString("status");
