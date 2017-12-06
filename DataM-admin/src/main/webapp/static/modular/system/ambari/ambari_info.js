@@ -44,7 +44,7 @@ AmbariInfoDlg.close = function() {
  * 收集数据
  */
 AmbariInfoDlg.collectData = function() {
-    this.set('definition_id').set('definition_name').set('service_name').set('component_name').set('schedule_interval').set('alert_label').set('desc');
+    this.set('definitionId').set('definitionName').set('serviceName').set('componentName').set('scheduleInterval').set('alertLabel').set('desc');
 
 }
 

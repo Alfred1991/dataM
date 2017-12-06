@@ -17,124 +17,124 @@ public class MonitorDefinition extends Model<MonitorDefinition>{
     /**
      * 主键id
      */
-    @TableId(value="monitor_id", type= IdType.AUTO)
-    private Integer monitor_id;
-    private Integer definition_id;
-    private String definition_name;
-    private String service_name;
-    private String component_name;
-    private Integer schedule_interval;
-    private String alert_label;
-    private Integer alert_type;
-    private String alert_content;
-    private Integer can_auto_recover;
-    private String auto_recover_api;
-    private Timestamp create_time;
-    private Timestamp modify_time;
+    @TableId(value="monitorId", type= IdType.AUTO)
+    private Integer monitorId;
+    private Integer definitionId;
+    private String definitionName;
+    private String serviceName;
+    private String componentName;
+    private Integer scheduleInterval;
+    private String alertLabel;
+    private Integer alertType;
+    private String alertContent;
+    private Integer canAutoRecover;
+    private String autoRecoverApi;
+    private Timestamp createTime;
+    private Timestamp modifyTime;
     private String desc;
 
-    public Integer getMonitor_id() {
-        return monitor_id;
+    public Integer getMonitorId() {
+        return monitorId;
     }
 
-    public void setMonitor_id(Integer monitor_id) {
-        this.monitor_id = monitor_id;
+    public void setMonitorId(Integer monitorId) {
+        this.monitorId = monitorId;
     }
 
-    public Integer getDefinition_id() {
-        return definition_id;
+    public Integer getDefinitionId() {
+        return definitionId;
     }
 
-    public void setDefinition_id(Integer definition_id) {
-        this.definition_id = definition_id;
+    public void setDefinitionId(Integer definitionId) {
+        this.definitionId = definitionId;
     }
 
-    public String getDefinition_name() {
-        return definition_name;
+    public String getDefinitionName() {
+        return definitionName;
     }
 
-    public void setDefinition_name(String definition_name) {
-        this.definition_name = definition_name;
+    public void setDefinitionName(String definitionName) {
+        this.definitionName = definitionName;
     }
 
-    public String getService_name() {
-        return service_name;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setService_name(String service_name) {
-        this.service_name = service_name;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String getComponent_name() {
-        return component_name;
+    public String getComponentName() {
+        return componentName;
     }
 
-    public void setComponent_name(String component_name) {
-        this.component_name = component_name;
+    public void setComponentName(String componentName) {
+        this.componentName = componentName;
     }
 
-    public Integer getSchedule_interval() {
-        return schedule_interval;
+    public Integer getScheduleInterval() {
+        return scheduleInterval;
     }
 
-    public void setSchedule_interval(Integer schedule_interval) {
-        this.schedule_interval = schedule_interval;
+    public void setScheduleInterval(Integer scheduleInterval) {
+        this.scheduleInterval = scheduleInterval;
     }
 
-    public String getAlert_label() {
-        return alert_label;
+    public String getAlertLabel() {
+        return alertLabel;
     }
 
-    public void setAlert_label(String alert_label) {
-        this.alert_label = alert_label;
+    public void setAlertLabel(String alertLabel) {
+        this.alertLabel = alertLabel;
     }
 
-    public Integer getAlert_type() {
-        return alert_type;
+    public Integer getAlertType() {
+        return alertType;
     }
 
-    public void setAlert_type(Integer alert_type) {
-        this.alert_type = alert_type;
+    public void setAlertType(Integer alertType) {
+        this.alertType = alertType;
     }
 
-    public String getAlert_content() {
-        return alert_content;
+    public String getAlertContent() {
+        return alertContent;
     }
 
-    public void setAlert_content(String alert_content) {
-        this.alert_content = alert_content;
+    public void setAlertContent(String alertContent) {
+        this.alertContent = alertContent;
     }
 
-    public Integer getCan_auto_recover() {
-        return can_auto_recover;
+    public Integer getCanAutoRecover() {
+        return canAutoRecover;
     }
 
-    public void setCan_auto_recover(Integer can_auto_recover) {
-        this.can_auto_recover = can_auto_recover;
+    public void setCanAutoRecover(Integer canAutoRecover) {
+        this.canAutoRecover = canAutoRecover;
     }
 
-    public String getAuto_recover_api() {
-        return auto_recover_api;
+    public String getAutoRecoverApi() {
+        return autoRecoverApi;
     }
 
-    public void setAuto_recover_api(String auto_recover_api) {
-        this.auto_recover_api = auto_recover_api;
+    public void setAutoRecoverApi(String autoRecoverApi) {
+        this.autoRecoverApi = autoRecoverApi;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
-    public Timestamp getModify_time() {
-        return modify_time;
+    public Timestamp getModifyTime() {
+        return modifyTime;
     }
 
-    public void setModify_time(Timestamp modify_time) {
-        this.modify_time = modify_time;
+    public void setModifyTime(Timestamp modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     public String getDesc() {

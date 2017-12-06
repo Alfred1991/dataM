@@ -6,16 +6,11 @@ import com.wan.dataM.admin.common.constant.Dict;
 import com.wan.dataM.admin.common.constant.factory.PageFactory;
 import com.wan.dataM.admin.common.exception.BizExceptionEnum;
 import com.wan.dataM.admin.common.exception.BussinessException;
-import com.wan.dataM.admin.common.persistence.dao.MonitorDefinitionMapper;
 import com.wan.dataM.admin.common.persistence.model.MonitorDefinition;
 import com.wan.dataM.admin.common.persistence.model.OperationLog;
-import com.wan.dataM.admin.core.log.LogObjectHolder;
-import com.wan.dataM.admin.modular.system.dao.AlertMgrDao;
 import com.wan.dataM.admin.modular.system.dao.PlatformMonitorDao;
-import com.wan.dataM.admin.modular.system.service.IPlatformMonitorService;
 import com.wan.dataM.admin.modular.system.warpper.LogWarpper;
 import com.wan.dataM.core.base.controller.BaseController;
-import com.wan.dataM.core.support.BeanKit;
 import com.wan.dataM.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,8 +80,7 @@ public class PlatformMonitorController extends BaseController {
 //        System.out.println("map = " + monitorDefinition.get("definition_id"));
 //        LogObjectHolder.me().set(monitorDefinition);
 
-        System.out.println("exeAlert ! ");
-        new AlertController().exeAlert(37,"Critical");
+
 
         return PREFIX + "platformMonitor_edit.html";
     }
@@ -111,7 +105,7 @@ public class PlatformMonitorController extends BaseController {
     @BussinessLog(value = "新增通知",key = "title",dict = Dict.MonitorDefinitionMap)
     @ResponseBody
     public Object add(MonitorDefinition monitorDefinition) {
-        Integer definitionId = monitorDefinition.getDefinition_id();
+        Integer definitionId = monitorDefinition.getDefinitionId();
         System.out.println("definitionId = " + definitionId);
 
         //判断是否已经存在该编号
@@ -119,13 +113,16 @@ public class PlatformMonitorController extends BaseController {
         if(null != result && result.size() > 0){
             return super.DUPLICATED;
         }
-
+        monitorDefinition.setAlertType(0);
+        monitorDefinition.setCanAutoRecover(0);
+        monitorDefinition.setAlertContent("");
+        monitorDefinition.setAutoRecoverApi("");
         //添加告警信息到数据库中
-        platformMonitorDao.insertPlatformMonitorDefinition(monitorDefinition.getDefinition_id(), monitorDefinition.getDefinition_name(),
-                monitorDefinition.getService_name(), monitorDefinition.getComponent_name(),
-                monitorDefinition.getSchedule_interval(), monitorDefinition.getAlert_label(),
-                monitorDefinition.getAlert_type(),monitorDefinition.getAlert_content(),
-                monitorDefinition.getCan_auto_recover(),monitorDefinition.getAuto_recover_api());
+        platformMonitorDao.insertPlatformMonitorDefinition(monitorDefinition.getDefinitionId(), monitorDefinition.getDefinitionName(),
+                monitorDefinition.getServiceName(), monitorDefinition.getComponentName(),
+                monitorDefinition.getScheduleInterval(), monitorDefinition.getAlertLabel(),
+                monitorDefinition.getAlertType(),monitorDefinition.getAlertContent(),
+                monitorDefinition.getCanAutoRecover(),monitorDefinition.getAutoRecoverApi());
 
         return super.SUCCESS_TIP;
     }
@@ -152,21 +149,21 @@ public class PlatformMonitorController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(MonitorDefinition monitorDefinition) {
-       Integer definitionId = monitorDefinition.getDefinition_id();
+       Integer definitionId = monitorDefinition.getDefinitionId();
         System.out.println("definitionId = " + definitionId);
         //判断是否已经存在该definition_ID
         Map<String,Object> result = platformMonitorDao.getPlatformMonitorDefinitionByDefinitionId(definitionId);
         if(null != result && result.size() > 0){
             return super.DUPLICATED;
         }
-        System.out.println("begin to exe update the getMonitor_id() = " + monitorDefinition.getMonitor_id());
+        System.out.println("begin to exe update the getMonitor_id() = " + monitorDefinition.getMonitorId());
         //修改告警信息到数据库中
-        boolean flag = platformMonitorDao.updatePlatformMonitorDefinition(monitorDefinition.getMonitor_id(),
-                monitorDefinition.getDefinition_id(), monitorDefinition.getDefinition_name(),
-                monitorDefinition.getService_name(), monitorDefinition.getComponent_name(),
-                monitorDefinition.getSchedule_interval(), monitorDefinition.getAlert_label(),
-                monitorDefinition.getAlert_type(),monitorDefinition.getAlert_content(),
-                monitorDefinition.getCan_auto_recover(),monitorDefinition.getAuto_recover_api());
+        boolean flag = platformMonitorDao.updatePlatformMonitorDefinition(monitorDefinition.getMonitorId(),
+                monitorDefinition.getDefinitionId(), monitorDefinition.getDefinitionName(),
+                monitorDefinition.getServiceName(), monitorDefinition.getComponentName(),
+                monitorDefinition.getScheduleInterval(), monitorDefinition.getAlertLabel(),
+                monitorDefinition.getAlertType(),monitorDefinition.getAlertContent(),
+                monitorDefinition.getCanAutoRecover(),monitorDefinition.getAutoRecoverApi());
 
         System.out.println("flag = " + flag);
         System.out.println("Success ！ " );

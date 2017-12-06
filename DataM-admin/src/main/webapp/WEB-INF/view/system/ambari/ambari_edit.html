@@ -3,17 +3,17 @@
     <div class="ibox-content">
         <div class="form-horizontal">
 
-            <input type="hidden" id="definitionId" value="${alertDefinition.definitionId}">
+            <input type="hidden" id="definitionId" value="${alertDefinition.definition_id}">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#input id="definitionName" name="监控项" underline="true" value="${alertDefinition.definitionName}" disabled="disabled"/>
+                    <#input id="definitionName" name="监控项" underline="true" value="${alertDefinition.definition_name}" disabled="disabled"/>
 
-                    <#input id="serviceName" name="Stack名" underline="true" value="${alertDefinition.serviceName}" disabled="disabled"/>
+                    <#input id="serviceName" name="Stack名" underline="true" value="${alertDefinition.service_name}" disabled="disabled"/>
 
-                    <#input id="componentName" name="组件名" type="email" value="${alertDefinition.componentName}" disabled="disabled"/>
+                    <#input id="componentName" name="组件名" type="email" value="${alertDefinition.component_name}" disabled="disabled"/>
 
-                    <#input id="scheduleInterval" name="监控周期" type="email" value="${alertDefinition.scheduleInterval}" disabled="disabled"/>
+                    <#input id="scheduleInterval" name="监控周期" type="email" value="${alertDefinition.schedule_interval}" disabled="disabled"/>
                 </div>
                 <div class="col-sm-6">
                     <div id="driverInfoContent">
